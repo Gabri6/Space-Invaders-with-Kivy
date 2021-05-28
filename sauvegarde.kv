@@ -1,0 +1,136 @@
+#:kivy 1.0.9
+
+<SpaceBunkerbits>:			# les différents carrés du bunker
+	size: 20, 20
+	canvas:
+		Color:
+			rgba: 0, 1, 0, 0.9	# couleur verte, avec une transparence de 0.9
+		Rectangle:
+			size: self.size
+			pos: self.pos
+	
+<SpaceBunker>
+	square1: left_side_bottom_square
+	square2: left_side_middle_square
+	square3: left_middle_middle_square
+	square4: left_middle_upper_square
+	square5: right_middle_middle_square
+	square6: right_middle_upper_square
+	square7: right_side_bottom_square
+	square8: right_side_middle_square
+	size: 80, 60
+	SpaceBunkerbits:
+		id: left_side_bottom_square  # le carré en bas, coté gauche du bunker
+		center_x: root.center_x - 30     # self renvoie au widget dont on parle, root celui dans lequel on est en train de coder
+		center_y: root.center_y - 20
+	SpaceBunkerbits:
+		id: left_side_middle_square  # le carré au milieu, coté gauche du bunker
+		center_x: root.center_x - 30
+		center_y: root.center_y
+	SpaceBunkerbits:
+		id: left_middle_middle_square  # le carré au milieu, milieu gauche du bunker
+		center_x: root.center_x - 10
+		center_y: root.center_y
+	SpaceBunkerbits:
+		id: left_middle_upper_square  # le carré en haut, milieu gauche du bunker
+		center_x: root.center_x - 10
+		center_y: root.center_y + 20
+	SpaceBunkerbits:
+		id: right_middle_middle_square  # le carré au milieu, au milieu droit du bunker
+		center_x: root.center_x + 10
+		center_y: root.center_y
+	SpaceBunkerbits:
+		id: right_middle_upper_square  # le carré en haut, au milieu droit du bunker
+		center_x: root.center_x + 10
+		center_y: root.center_y + 20
+	SpaceBunkerbits:
+		id: right_side_bottom_square  # le carré en bas, coté droit du bunker
+		center_x: root.center_x + 30
+		center_y: root.center_y - 20
+	SpaceBunkerbits:
+		id: right_side_middle_square  # le carré au milieu, coté droit du bunker
+		center_x: root.center_x + 30
+		center_y: root.center_y
+
+<SpaceTank>:
+	size: 40, 10
+	canvas:
+		Color:
+			rgba: 0,1,0,0.9
+		Rectangle:
+			size: self.size
+			pos: self.pos
+		Rectangle:
+			size: self.width - 4, 2
+			pos: self.center_x - (self.width/2) + 2, self.center_y + 5
+		Rectangle:
+			size: 6, 5
+			pos: self.center_x - 3, self.center_y + 7
+		Rectangle:
+			size: 2, 3
+			pos: self.center_x - 1, self.center_y + 12
+
+<Invader>
+	size: 50, 50
+	canvas:
+		Color:
+			rgba: 1, 1, 1, 1
+		Ellipse:
+			pos: self.pos
+			size: self.size
+			source: self.image
+<Fleet>
+
+<SpaceBullet>
+	size: 3, 10
+	canvas:
+		Color:
+			rgba:1, 1, 1, 1
+		Rectangle:
+			pos: self.pos
+			size: self.size
+
+<SpaceGame>:
+	tank: space_tank
+	bullet: space_bullet
+	bunker1: bunker_left
+	bunker2: bunker_middleleft
+	bunker3: bunker_middleright
+	bunker4: bunker_right
+	canvas:
+		Color:
+			rgba: 0, 1, 0, 0.9
+		Rectangle:
+			pos: 0, 15
+			size: self.width, 3
+
+	SpaceTank:
+		id: space_tank
+		center_x: root.center_x
+		y: 24
+	SpaceBullet:
+		id: space_bullet	
+	Fleet:
+		id:fleet
+		pos:self.pos
+	Label:
+		font_size: 20
+		right: root.width - 20
+		top: root.top - 20
+		text: '0' #mettre  str(root.tank.score)
+	SpaceBunker:
+		id: bunker_left   #choisir un id différent pour chaque objet différent mais de la meme classe
+		center_x: root.width//5 - 30
+		center_y: 80
+	SpaceBunker:
+		id: bunker_middleleft
+		center_x: (2 * root.width//5) - 10
+		center_y: 80
+	SpaceBunker:
+		id: bunker_middleright
+		center_x: (3 * root.width//5) + 10
+		center_y: 80
+	SpaceBunker:
+		id: bunker_right
+		center_x: (4 * root.width//5) + 30
+		center_y: 80
